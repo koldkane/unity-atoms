@@ -31,7 +31,9 @@ namespace UnityAtoms
         [SerializeField]
         [Range(0, 10)]
         [Tooltip("The number of old values (between 0-10) being replayed when someone subscribes to this Event.")]
-        private int _replayBufferSize = 1;
+        // 7QUARK
+        private int _replayBufferSize = 0;
+        //private int _replayBufferSize = 1;
 
         private Queue<T> _replayBuffer = new Queue<T>();
 
