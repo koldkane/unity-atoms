@@ -1,5 +1,5 @@
 {
-  "name": "com.unity-atoms.unity-atoms-input-system",
+  "name": "com.7quark.unity-atoms-input-system",
   "displayName": "Unity Atoms Input System",
   "version": "4.4.5",
   "unity": "2018.3",
@@ -18,8 +18,8 @@
     "/Editor.meta"
   ],
   "dependencies": {
-    "com.unity-atoms.unity-atoms-core": "4.4.5",
-    "com.unity-atoms.unity-atoms-base-atoms": "4.4.5",
+    "com.7quark.unity-atoms-core": "4.4.5",
+    "com.7quark.unity-atoms-base-atoms": "4.4.5",
     "com.unity.inputsystem": "1.0.1"
   }
 }

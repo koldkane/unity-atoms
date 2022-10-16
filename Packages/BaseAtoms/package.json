@@ -1,5 +1,5 @@
 {
-  "name": "com.unity-atoms.unity-atoms-base-atoms",
+  "name": "com.7quark.unity-atoms-base-atoms",
   "displayName": "Unity Atoms Base Atoms",
   "version": "4.4.5",
   "unity": "2018.3",
@@ -22,6 +22,6 @@
   "dependencies": {
     "com.unity.modules.physics": "1.0.0",
     "com.unity.modules.physics2d": "1.0.0",
-    "com.unity-atoms.unity-atoms-core": "4.4.5"
+    "com.7quark.unity-atoms-core": "4.4.5"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "com.unity-atoms.unity-atoms-mono-hooks",
+  "name": "com.7quark.unity-atoms-mono-hooks",
   "displayName": "Unity Atoms Mono Hooks",
   "version": "4.4.5",
   "unity": "2018.3",
@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "com.unity.ugui": "1.0.0",
-    "com.unity-atoms.unity-atoms-core": "4.4.5",
-    "com.unity-atoms.unity-atoms-base-atoms": "4.4.5"
+    "com.7quark.unity-atoms-core": "4.4.5",
+    "com.7quark.unity-atoms-base-atoms": "4.4.5"
   }
 }
