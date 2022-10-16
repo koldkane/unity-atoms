@@ -52,7 +52,8 @@ namespace UnityAtoms
         {
             get
             {
-                GetOrCreateEvent<E1>();
+                // 7QUARK
+                //GetOrCreateEvent<E1>();
                 return _changed;
             }
             set
@@ -72,7 +73,8 @@ namespace UnityAtoms
         {
             get
             {
-                GetOrCreateEvent<E2>();
+                // 7QUARK
+                //GetOrCreateEvent<E2>();
                 return _changedWithHistory;
             }
             set
