@@ -34,6 +34,7 @@ namespace UnityAtoms.Editor
 
 #if !UNITY_ATOMS_GENERATE_DOCS
             StackTraceEditor.RenderStackTrace(root, atomEvent.GetInstanceID());
+            AtomRegisterEditor.RenderRegister(root, atomEvent.GetInstanceID());
 #endif
 
             return root;

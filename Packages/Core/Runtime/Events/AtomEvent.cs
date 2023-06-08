@@ -84,6 +84,9 @@ namespace UnityAtoms
         public void Register(Action<T> action)
         {
             _onEvent += action;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateTypedActions(GetInstanceID(), _onEvent);
+#endif
             ReplayBufferToSubscriber(action);
         }
 
@@ -94,6 +97,9 @@ namespace UnityAtoms
         public void Unregister(Action<T> action)
         {
             _onEvent -= action;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateTypedActions(GetInstanceID(), _onEvent);
+#endif
         }
 
         /// <summary>
@@ -103,6 +109,9 @@ namespace UnityAtoms
         {
             base.UnregisterAll();
             _onEvent = null;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateTypedActions(GetInstanceID(), _onEvent);
+#endif
         }
 
         /// <summary>
@@ -112,6 +121,9 @@ namespace UnityAtoms
         public void RegisterListener(IAtomListener<T> listener, bool replayEventsBuffer = true)
         {
             _onEvent += listener.OnEventRaised;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateTypedActions(GetInstanceID(), _onEvent);
+#endif
             if (replayEventsBuffer)
             {
                 ReplayBufferToSubscriber(listener.OnEventRaised);
@@ -125,6 +137,9 @@ namespace UnityAtoms
         public void UnregisterListener(IAtomListener<T> listener)
         {
             _onEvent -= listener.OnEventRaised;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateTypedActions(GetInstanceID(), _onEvent);
+#endif
         }
 
         #region Observable

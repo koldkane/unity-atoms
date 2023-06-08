@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+using System.Collections.ObjectModel;
+#endif
 
 namespace UnityAtoms
 {
@@ -10,11 +13,60 @@ namespace UnityAtoms
     [EditorIcon("atom-icon-cherry")]
     public abstract class AtomEventBase : BaseAtom, ISerializationCallbackReceiver
     {
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+        private static readonly Dictionary<int, ObservableCollection<Delegate>> s_actionsById = new();
+        private static readonly Dictionary<int, ObservableCollection<Delegate>> s_typedActionsById = new();
+
+        public static ObservableCollection<Delegate> GetActions(int id)
+        {
+            return GetOrCreateActions(s_actionsById, id);
+        }
+
+        public static ObservableCollection<Delegate> GetTypedActions(int id)
+        {
+            return GetOrCreateActions(s_typedActionsById, id);
+        }
+
+        private static ObservableCollection<Delegate> GetOrCreateActions(IDictionary<int, ObservableCollection<Delegate>> dict, int id)
+        {
+            if (!dict.ContainsKey(id))
+            {
+                dict.Add(id, new ObservableCollection<Delegate>());
+            }
+            else if (dict[id] == null)
+            {
+                dict[id] = new ObservableCollection<Delegate>();
+            }
+            return dict[id];
+        }
+
+        private static void UpdateActions(int instanceId, Action a)
+        {
+            var c = GetActions(instanceId);
+            c.Clear();
+            if (a == null) return;
+            foreach (var d in a.GetInvocationList())
+            {
+                c.Add(d);
+            }
+        }
+
+        protected static void UpdateTypedActions<T>(int instanceId, Action<T> a)
+        {
+            var c = GetTypedActions(instanceId);
+            c.Clear();
+            if (a == null) return;
+            foreach (var d in a.GetInvocationList())
+            {
+                c.Add(d);
+            }
+        }
+#endif
+        
         /// <summary>
         /// Event without value.
         /// </summary>
         public event Action OnEventNoValue;
-
 
         public virtual void Raise()
         {
@@ -31,6 +83,9 @@ namespace UnityAtoms
         public void Register(Action del)
         {
             OnEventNoValue += del;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateActions(GetInstanceID(), OnEventNoValue);
+#endif
         }
 
         /// <summary>
@@ -40,6 +95,9 @@ namespace UnityAtoms
         public void Unregister(Action del)
         {
             OnEventNoValue -= del;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateActions(GetInstanceID(), OnEventNoValue);
+#endif
         }
 
         /// <summary>
@@ -48,6 +106,9 @@ namespace UnityAtoms
         public virtual void UnregisterAll()
         {
             OnEventNoValue = null;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateActions(GetInstanceID(), OnEventNoValue);
+#endif
         }
 
         /// <summary>
@@ -57,6 +118,9 @@ namespace UnityAtoms
         public void RegisterListener(IAtomListener listener)
         {
             OnEventNoValue += listener.OnEventRaised;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateActions(GetInstanceID(), OnEventNoValue);
+#endif
         }
 
         /// <summary>
@@ -66,6 +130,9 @@ namespace UnityAtoms
         public void UnregisterListener(IAtomListener listener)
         {
             OnEventNoValue -= listener.OnEventRaised;
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+            UpdateActions(GetInstanceID(), OnEventNoValue);
+#endif
         }
 
         public void OnBeforeSerialize() { }
@@ -79,6 +146,9 @@ namespace UnityAtoms
                 {
                     OnEventNoValue -= (Action)d;
                 }
+#if !UNITY_ATOMS_GENERATE_DOCS && UNITY_EDITOR
+                UpdateActions(GetInstanceID(), OnEventNoValue);
+#endif
             }
         }
 
