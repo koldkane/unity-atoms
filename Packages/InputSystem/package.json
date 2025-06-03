@@ -1,7 +1,7 @@
 {
   "name": "com.7quark.unity-atoms-input-system",
   "displayName": "Unity Atoms Input System",
-  "version": "4.4.5",
+  "version": "4.4.6",
   "unity": "2018.3",
   "description": "Unity Atoms with Unity's Input System.",
   "keywords": [
@@ -18,8 +18,8 @@
     "/Editor.meta"
   ],
   "dependencies": {
-    "com.7quark.unity-atoms-core": "4.4.5",
-    "com.7quark.unity-atoms-base-atoms": "4.4.5",
+    "com.7quark.unity-atoms-core": "4.4.8",
+    "com.7quark.unity-atoms-base-atoms": "4.4.6",
     "com.unity.inputsystem": "1.0.1"
   }
 }
