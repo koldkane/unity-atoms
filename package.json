@@ -1,9 +1,9 @@
 {
   "name": "com.7quark.unity-atoms",
   "displayName": "Unity Atoms",
-  "version": "4.4.5",
+  "version": "4.4.6",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
